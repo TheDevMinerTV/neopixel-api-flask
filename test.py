@@ -9,20 +9,30 @@ app.config["DEBUG"] = True
 neopixels = [
 ]
 
+def sort_ids():
+    for passnum in range(len(neopixels)-1,0,-1):
+        for i in range(passnum):
+            if neopixels[i]>neopixels[i+1]:
+                temp = neopixels[i]
+                neopixels[i] = neopixels[i+1]
+                neopixels[i+1] = temp
+
 @app.errorhandler(404)
-def page_not_found(e):
+def four_o_four(e):
     return "<h1>404</h1><p>This api endpoint could not be found.</p>", 404
 
 @app.route('/', methods=['GET'])
 def home():
     return "<h1>NEOPIXEL-API</h1><p>This site is a API for neopixels.</p>"
 
-@app.route('/api/v1/neopixels/get_all', methods=['GET'])
-def neopixels_all():
+# ALL
+@app.route('/api/v1/neopixels/all/get', methods=['GET'])
+def neopixels_all_get():
     return jsonify(neopixels)
 
-@app.route('/api/v1/neopixels/get_by_id', methods=['GET'])
-def api_id():
+# SINGLE
+@app.route('/api/v1/neopixels/single/get_by_id', methods=['GET'])
+def neopixels_single_get_by_id():
     # Check if an ID was provided as part of the URL.
     # If ID is provided, assign it to a variable.
     # If no ID is provided, display an error in the browser.
@@ -44,8 +54,15 @@ def api_id():
     # Python dictionaries to the JSON format.
     return jsonify(results)
 
-@app.route('/api/v1/neopixels/set_all', methods=['GET'])
-def neopixels_all():
+@app.route('/api/v1/neopixels/single/create_by_id', methods=['PUT'])
+def neopixels_single_set_by_id():
+    id = request.json['id']
+    for neopixel in neopixels:
+        if neopixel['id'] == id:
+            return "Error: ID " + str(id) + " already exists!"  
+    
+    neopixels.append(request.json)
+    sort_ids()
     return jsonify(neopixels)
 
 
