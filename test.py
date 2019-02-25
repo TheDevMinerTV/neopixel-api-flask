@@ -1,3 +1,5 @@
+#!/usr/bin/python2.7
+
 import flask
 from flask import request, jsonify
 
@@ -5,38 +7,6 @@ app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
 neopixels = [
-    {
-	'id': 0,
-	'values': {
-	    'r': 255,
-	    'g': 0,
-	    'b': 127
-	}
-    },
-    {
-        'id': 1,
-        'values':  {
-            'r': 127,
-            'g': 31,
-            'b': 63
-        }
-    },
-    {
-        'id': 2,
-        'values': {
-            'r': 255,
-            'g': 255,
-            'b': 63
-        }
-    },
-    {
-        'id': 3,
-        'values': {
-            'r': 31,
-            'g': 127,
-            'b': 255
-        }
-    }
 ]
 
 @app.errorhandler(404)
@@ -45,9 +15,9 @@ def page_not_found(e):
 
 @app.route('/', methods=['GET'])
 def home():
-    return "<h1>NEOPIXEL-API</h1><p>This site is a prototype API for nagios-neopixel.</p>"
+    return "<h1>NEOPIXEL-API</h1><p>This site is a API for neopixels.</p>"
 
-@app.route('/api/v1/neopixels/all', methods=['GET'])
+@app.route('/api/v1/neopixels/get_all', methods=['GET'])
 def neopixels_all():
     return jsonify(neopixels)
 
@@ -73,5 +43,10 @@ def api_id():
     # Use the jsonify function from Flask to convert our list of
     # Python dictionaries to the JSON format.
     return jsonify(results)
+
+@app.route('/api/v1/neopixels/set_all', methods=['GET'])
+def neopixels_all():
+    return jsonify(neopixels)
+
 
 app.run(host='0.0.0.0')
