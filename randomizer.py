@@ -1,3 +1,5 @@
+#!/usr/bin/python2.7
+
 import requests
 from random import randint
 import time
