@@ -3,8 +3,8 @@
 import flask
 from flask import request, jsonify
 
-app = flask.Flask(__name__)
-app.config["DEBUG"] = False
+app = flask.Flask(__name__, static_url_path='')
+app.config["DEBUG"] = True
 
 LED_COUNT = 150 # Amount of neopixels
 
@@ -24,9 +24,49 @@ def sort_ids():
 def four_o_four(e):
     return "<h1>404</h1><p>This api endpoint could not be found.</p>", 404
 
+
+# API Documentation
+# HTML
 @app.route('/', methods=['GET'])
-def home():
-    return "<h1>NEOPIXEL-API</h1><p>This site is a API for neopixels.</p>"
+def api_docs_html():
+    return flask.send_from_directory('api_docs/build', 'index.html')
+
+# CSS
+@app.route('/css/combined.css', methods=['GET'])
+def api_docs_css():
+    return flask.send_from_directory('api_docs/build/css', 'combined.css')
+
+# JavaScript
+@app.route('/js/combined.js', methods=['GET'])
+def api_docs_js():
+    return flask.send_from_directory('api_docs/build/js', 'combined.js')
+
+# Fonts
+@app.route('/font/apidoc.eot', methods=['GET'])
+def api_docs_font_ad_eot():
+    return flask.send_from_directory('api_docs/build/font', 'apidoc.eot')
+
+@app.route('/font/apidoc.ttf', methods=['GET'])
+def api_docs_font_ad_ttf():
+    return flask.send_from_directory('api_docs/build/font', 'apidoc.ttf')
+
+@app.route('/font/apidoc.woff', methods=['GET'])
+def api_docs_font_ad_woff():
+    return flask.send_from_directory('api_docs/build/font', 'apidoc.woff')
+
+@app.route('/font/source-code-pro.eot', methods=['GET'])
+def api_docs_font_scp_eot():
+    return flask.send_from_directory('api_docs/build/font', 'source-code-pro.eot')
+
+@app.route('/font/source-code-pro.tff', methods=['GET'])
+def api_docs_font_scp_tff():
+    return flask.send_from_directory('api_docs/build/font', 'source-code-pro.ttf')
+
+@app.route('/font/source-code-pro.woff', methods=['GET'])
+def api_docs_font_scp_woff():
+    return flask.send_from_directory('api_docs/build/font', 'source-code-pro.woff')
+
+
 
 # ALL
 # Get all neopixels
