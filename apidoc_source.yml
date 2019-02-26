@@ -1,0 +1,200 @@
+---
+configuration:
+  title: NeoPixel API
+  description: A API for controlling NeoPixels
+  uri: http://localhost:8088
+
+categories:
+  All:
+    description: all NeoPixels
+
+  Single:
+    description: single NeoPixel
+
+versions:
+  v1:
+    status: current
+    major: 1
+
+    methods:
+      AllGet:
+        label: Get all
+        uri: /api/{version}/all/get
+        description: Get the status of all NeoPixels
+        category: All
+        request_parameters:
+          version:
+            type: Version
+            description: API version
+            generic: true
+        request_body:
+          type: array
+          description: List of users
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                description: Position of the NeoPixel in the array
+              values:
+                type: object
+                description: Values of the NeoPixel
+                properties:
+                  r:
+                    type: integer
+                    description: Red value of the NeoPixel
+                  g:
+                    type: integer
+                    description: Green value of the NeoPixel
+                  b:
+                    type: integer
+                    description: Blue value of the NeoPixel
+
+      AllClear:
+        label: Clear all
+        description: Set all NeoPixels to off
+        uri: /api/{version}/all/clear
+        category: All
+        request_parameters:
+          version:
+            type: Version
+            description: API version
+            generic: true
+        request_body:
+          type: array
+          description: List of users
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                description: Position of the NeoPixel in the array
+              values:
+                type: object
+                description: Values of the NeoPixel
+                properties:
+                  r:
+                    type: integer
+                    description: Red value of the NeoPixel
+                  g:
+                    type: integer
+                    description: Green value of the NeoPixel
+                  b:
+                    type: integer
+                    description: Blue value of the NeoPixel
+
+      AllSetByArray:
+        label: Set all by array
+        method: POST
+        description: Set all NeoPixels according to a json array
+        uri: /api/{version}/all/set_by_array
+        category: All
+        request_parameters:
+          Array:
+            type: array
+            description: Array of values
+          version:
+            type: Version
+            description: API version
+            generic: true
+        response_codes:
+          - code: 400
+            message: Array to big or to short
+            description: The the array to big or to short
+        request_body:
+          type: array
+          description: List of users
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                description: Position of the NeoPixel in the array
+              values:
+                type: object
+                description: Values of the NeoPixel
+                properties:
+                  r:
+                    type: integer
+                    description: Red value of the NeoPixel
+                  g:
+                    type: integer
+                    description: Green value of the NeoPixel
+                  b:
+                    type: integer
+                    description: Blue value of the NeoPixel
+
+      SingleGet:
+        label: Get single
+        uri: /api/{version}/single/get
+        description: Get NeoPixel by id
+        category: Single
+        request_parameters:
+          version:
+            type: Version
+            description: API version
+            generic: true
+        request_body:
+          items:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: Position of the NeoPixel in the array
+            values:
+              type: object
+              description: Values of the NeoPixel
+              properties:
+                r:
+                  type: integer
+                  description: Red value of the NeoPixel
+                g:
+                  type: integer
+                  description: Green value of the NeoPixel
+                b:
+                  type: integer
+                  description: Blue value of the NeoPixel
+
+      SingleSet:
+        label: Set single
+        method: POST
+        description: Set or update a single NeoPixel
+        uri: /{version}/single/set
+        category: Single
+        request_parameters:
+          version:
+            type: Version
+            description: API version
+            generic: true
+          id:
+            type: integer
+            description: id of NeoPixel
+        request_body:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: Position of the NeoPixel in the array
+            values:
+              type: object
+              description: Values of the NeoPixel
+              properties:
+                r:
+                  type: integer
+                  description: Red value of the NeoPixel
+                g:
+                  type: integer
+                  description: Green value of the NeoPixel
+                b:
+                  type: integer
+                  description: Blue value of the NeoPixel
+
+    types:
+      Version:
+        description: A version of the API
+        format:
+          pretty: VN
+          advanced: V\d+
+        item:
+          type: string
+          sample: v1
