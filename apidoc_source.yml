@@ -42,12 +42,18 @@ versions:
                 properties:
                   r:
                     type: integer
+                    minimum: 0
+                    maximum: 255
                     description: Red value of the NeoPixel
                   g:
                     type: integer
+                    minimum: 0
+                    maximum: 255
                     description: Green value of the NeoPixel
                   b:
                     type: integer
+                    minimum: 0
+                    maximum: 255
                     description: Blue value of the NeoPixel
 
       AllClear:
@@ -75,12 +81,18 @@ versions:
                 properties:
                   r:
                     type: integer
+                    minimum: 0
+                    maximum: 255
                     description: Red value of the NeoPixel
                   g:
                     type: integer
+                    minimum: 0
+                    maximum: 255
                     description: Green value of the NeoPixel
                   b:
                     type: integer
+                    minimum: 0
+                    maximum: 255
                     description: Blue value of the NeoPixel
 
       AllSetByArray:
@@ -116,12 +128,18 @@ versions:
                 properties:
                   r:
                     type: integer
+                    minimum: 0
+                    maximum: 255
                     description: Red value of the NeoPixel
                   g:
                     type: integer
+                    minimum: 0
+                    maximum: 255
                     description: Green value of the NeoPixel
                   b:
                     type: integer
+                    minimum: 0
+                    maximum: 255
                     description: Blue value of the NeoPixel
 
       SingleGet:
@@ -136,24 +154,30 @@ versions:
             generic: true
         request_body:
           items:
-          type: object
-          properties:
-            id:
-              type: integer
-              description: Position of the NeoPixel in the array
-            values:
-              type: object
-              description: Values of the NeoPixel
-              properties:
-                r:
-                  type: integer
-                  description: Red value of the NeoPixel
-                g:
-                  type: integer
-                  description: Green value of the NeoPixel
-                b:
-                  type: integer
-                  description: Blue value of the NeoPixel
+            type: object
+            properties:
+              id:
+                type: integer
+                description: Position of the NeoPixel in the array
+              values:
+                type: object
+                description: Values of the NeoPixel
+                properties:
+                  r:
+                    type: integer
+                    minimum: 0
+                    maximum: 255
+                    description: Red value of the NeoPixel
+                  g:
+                    type: integer
+                    minimum: 0
+                    maximum: 255
+                    description: Green value of the NeoPixel
+                  b:
+                    type: integer
+                    minimum: 0
+                    maximum: 255
+                    description: Blue value of the NeoPixel
 
       SingleSet:
         label: Set single
@@ -181,12 +205,18 @@ versions:
               properties:
                 r:
                   type: integer
+                  minimum: 0
+                  maximum: 255
                   description: Red value of the NeoPixel
                 g:
                   type: integer
+                  minimum: 0
+                  maximum: 255
                   description: Green value of the NeoPixel
                 b:
                   type: integer
+                  minimum: 0
+                  maximum: 255
                   description: Blue value of the NeoPixel
 
     types:
