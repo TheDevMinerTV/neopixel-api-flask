@@ -30,12 +30,12 @@ def home():
 
 # ALL
 # Get all neopixels
-@app.route('/api/neopixels/all/get', methods=['GET'])
+@app.route('/api/v1/all/get', methods=['GET'])
 def neopixels_all_get():
     return jsonify(neopixels)
 
 # Set all neopixels to off
-@app.route('/api/neopixels/all/clear', methods=['PUT'])
+@app.route('/api/v1/all/clear', methods=['PUT'])
 def neopixels_all_clear():
     for i in range(len(neopixels)):
         neopixels[i] = {'id': i, 'values': {'r': 0, 'g': 0, 'b': 0}}
@@ -46,9 +46,9 @@ def neopixels_all_clear():
     return jsonify(neopixels)
 
 # Set all neopixels to colors according to a array
-@app.route('/api/neopixels/all/set_by_array', methods=['POST'])
+@app.route('/api/v1/all/set_by_array', methods=['POST'])
 def neopixels_all_set_by_array():
-    if len(request.json) < LED_COUNT:
+    if len(request.json) < LED_COUNT or len(request.json > LED_COUNT):
         abort(400)
     
     for i in range(len(neopixels)):
@@ -62,8 +62,8 @@ def neopixels_all_set_by_array():
 
 # SINGLE
 # Get neopixel by id
-@app.route('/api/neopixels/single/get_by_id', methods=['GET'])
-def neopixels_single_get_by_id():
+@app.route('/api/v1/single/get', methods=['GET'])
+def neopixels_single_get():
     if 'id' in request.args:
         id = int(request.args['id'])
     else:
@@ -78,8 +78,8 @@ def neopixels_single_get_by_id():
     return jsonify(results)
 
 # Set neopixel by id
-@app.route('/api/neopixels/single/set_by_id', methods=['PUT', 'POST'])
-def neopixels_single_set_by_id():
+@app.route('/api/v1/single/set', methods=['PUT', 'POST'])
+def neopixels_single_set():
     id = request.json['id']
     if request.method == 'PUT':
         for neopixel in neopixels:

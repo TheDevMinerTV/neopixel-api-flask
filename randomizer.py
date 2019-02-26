@@ -4,7 +4,7 @@ import requests
 from random import randint
 import time
 
-url = 'http://localhost:5000/api/neopixels/all/set_by_array'
+url = 'http://localhost:5000/api/v1/all/set_by_array'
 headers = {'Content-Type': 'application/json'}
 
 while True:
