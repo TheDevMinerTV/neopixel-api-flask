@@ -21,7 +21,7 @@ def colorUpdate(strip, r):
     data = r.json()
     for i in data:
 	strip.setPixelColor(i['id'], Color(i['values']['r'], i['values']['g'], i['values']['b']))
-    strip.show()
+        strip.show()
 
 if __name__ == '__main__':
     strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
