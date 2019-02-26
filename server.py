@@ -48,7 +48,7 @@ def neopixels_all_clear():
 # Set all neopixels to colors according to a array
 @app.route('/api/v1/all/set_by_array', methods=['POST'])
 def neopixels_all_set_by_array():
-    if len(request.json) < LED_COUNT or len(request.json > LED_COUNT):
+    if len(request.json) < LED_COUNT or len(request.json) > LED_COUNT:
         abort(400)
     
     for i in range(len(neopixels)):
