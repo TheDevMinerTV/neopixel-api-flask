@@ -69,13 +69,9 @@ def neopixels_single_get():
     else:
         return "Error: No id field provided. Please specify an id."
 
-    results = []
-
     for neopixel in neopixels:
         if neopixel['id'] == id:
-            results.append(neopixel)
-
-    return jsonify(results)
+            return jsonify(neopixel)
 
 # Set neopixel by id
 @app.route('/api/v1/single/set', methods=['PUT', 'POST'])
@@ -97,7 +93,7 @@ def neopixels_single_set():
         neopixels.append(request.json)
     
     sort_ids()
-    return jsonify(neopixels)
+    return jsonify(neopixel)
 
 
 app.run(host='0.0.0.0', port='8088')
