@@ -22,4 +22,4 @@ while True:
 
     requests.post(url, json=neopixel_data) #, headers=headers
 #    time.sleep(1)
-    time.sleep(2.5)
+    time.sleep(0.5)
