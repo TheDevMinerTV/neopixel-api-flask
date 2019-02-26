@@ -100,4 +100,4 @@ def neopixels_single_set():
     return jsonify(neopixels)
 
 
-app.run(host='0.0.0.0')
+app.run(host='0.0.0.0', port='8088')
