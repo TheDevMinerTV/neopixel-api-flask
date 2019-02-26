@@ -1,0 +1,5 @@
+input:
+  locations:
+    - apidoc_source.yml
+output:
+  location: build/index.html
