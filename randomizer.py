@@ -22,5 +22,5 @@ while True:
         }
         neopixel_data.append(payload)
 
-    requests.post('http://' + URL + '':8088/api/v1/all/get', json=neopixel_data) #, headers=headers
+    requests.post('http://' + URL + ':8088/api/v1/all/get', json=neopixel_data) #, headers=headers
     time.sleep(0.5)
