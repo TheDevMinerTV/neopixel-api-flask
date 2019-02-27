@@ -4,7 +4,9 @@ import requests
 from random import randint
 import time
 
-url = 'http://localhost:8088/api/v1/all/set_by_array'
+URL = 'localhost'
+
+
 headers = {'Content-Type': 'application/json'}
 
 while True:
@@ -20,6 +22,5 @@ while True:
         }
         neopixel_data.append(payload)
 
-    requests.post(url, json=neopixel_data) #, headers=headers
-#    time.sleep(1)
+    requests.post('http://' + URL + '':8088/api/v1/all/get', json=neopixel_data) #, headers=headers
     time.sleep(0.5)
