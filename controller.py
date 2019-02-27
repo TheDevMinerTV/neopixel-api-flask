@@ -27,11 +27,11 @@ if __name__ == '__main__':
     strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ*1000, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
     strip.begin()
 
-        while True:
-            try:
-                r = requests.get('http://' + URL + ':8088/api/v1/all/get')
-                colorUpdate(strip, r)
-            except:
-                continue
+    while True:
+        try:
+            r = requests.get('http://' + URL + ':8088/api/v1/all/get')
+            colorUpdate(strip, r)
+        except:
+            continue
 
-            time.sleep(0.05)
+        time.sleep(0.05)
