@@ -83,3 +83,5 @@ This repository contains a api for neopixels to be controlled over http!
     ```bash
     sudo ./randomizer.py
     ```
+
+9. Develop! (REQUIRED)    :joy:
