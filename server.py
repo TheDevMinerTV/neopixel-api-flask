@@ -4,13 +4,13 @@ import flask
 from flask import request, jsonify
 
 app = flask.Flask(__name__, static_url_path='')
-app.config["DEBUG"] = True
+app.config["DEBUG"] = False
+
 
 LED_COUNT = 150 # Amount of neopixels
 
 
-neopixels = [
-]
+neopixels = []
 
 def sort_ids():
     for passnum in range(len(neopixels)-1,0,-1):
