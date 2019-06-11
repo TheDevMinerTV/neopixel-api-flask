@@ -58,6 +58,7 @@ versions:
 
       AllClear:
         label: Clear all
+        method: PUT
         description: Set all NeoPixels to off
         uri: /api/{version}/all/clear
         category: All
@@ -190,9 +191,6 @@ versions:
             type: Version
             description: API version
             generic: true
-          id:
-            type: integer
-            description: id of NeoPixel
         request_body:
           type: object
           properties:
