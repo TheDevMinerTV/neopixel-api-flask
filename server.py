@@ -115,14 +115,19 @@ def neopixels_single_get():
             return jsonify(neopixel)
 
 # Set neopixel by id
-@app.route('/api/v1/single/set', methods=['PUT', 'POST'])
+@app.route('/api/v1/single/set', methods=['POST'])
 def neopixels_single_set():
     id = request.json['id']
-    if request.method == 'PUT':
-        for neopixel in neopixels:
-            if neopixel['id'] == id:
-                return "Error: ID " + str(id) + " already exists!"
-        neopixels.append(request.json)
+    for i, neopixel in enumerate(neopixels):
+        if neopixel['id'] == id:
+            neopixels[i] = request.json
+            print('Neopixel with id ' + str(id) + " got updated with json " + str(request.json))
+            print('After update pixel with id ' + str(id) + " has json " + str(neopixels[i]))
+            return jsonify(neopixels)
+    
+    neopixels.append(request.json)
+    sort_ids()
+    return jsonify(neopixels[id])
 
 # Fade neopixel by id to different color
 @app.route('/api/v1/single/fade', methods=['POST'])
