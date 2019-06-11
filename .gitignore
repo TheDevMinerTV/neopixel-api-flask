@@ -1,0 +1,8 @@
+# Ignore the compiled api docs
+api_docs/build
+
+# Ignore the task list
+neopixel-api-flask.tasklist
+
+# Ignore vscode hidden folder
+.vscode
