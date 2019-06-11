@@ -2,6 +2,7 @@
 
 import flask
 from flask import request, jsonify
+from time import sleep
 
 app = flask.Flask(__name__, static_url_path='')
 app.config["DEBUG"] = False
@@ -123,17 +124,48 @@ def neopixels_single_set():
                 return "Error: ID " + str(id) + " already exists!"
         neopixels.append(request.json)
 
-    elif request.method == 'POST':
-        for i, neopixel in enumerate(neopixels):
-            if neopixel['id'] == id:
-                neopixels[i] = request.json
-                print('Neopixel with id ' + str(id) + " got updated with json " + str(request.json))
-                print('After update pixel with id ' + str(id) + " has json " + str(neopixels[i]))
-                return jsonify(neopixels)
-        neopixels.append(request.json)
-    
-    sort_ids()
-    return jsonify(neopixel)
+# Fade neopixel by id to different color
+@app.route('/api/v1/single/fade', methods=['POST'])
+def neopixels_single_fade():
+    id = request.json['id']
+    for i, neopixel in enumerate(neopixels):
+        if neopixel['id'] == id:
+            origPixel = neopixels[i]
+
+            r = request.json['values']['r']
+            g = request.json['values']['g']
+            b = request.json['values']['b']
+            
+            print('Neopixel {} fading to color {} {} {}'.format(id, r, g, b))
+
+            j = 255
+            
+            # Set neopixel to values
+            neopixels[i] = request.json
+
+            while j >= 0:
+                if r > 0:
+                    r = r - 1
+                    neopixels[i]['values']['r'] = r
+
+                if g > 0:
+                    g = g - 1
+                    neopixels[i]['values']['g'] = g
+                
+                if b > 0:
+                    b = b - 1
+                    neopixels[i]['values']['b'] = b
+                
+                print('Currently at {} {} {}'.format(r, g, b))
+                
+                sleep(request.json['delay'])
+                j = j - 1
+
+            neopixels[i] = origPixel
+
+            return jsonify(neopixels)
+
+    abort(400)
 
 
 app.run(host='0.0.0.0', port='8088')

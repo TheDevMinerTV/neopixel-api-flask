@@ -219,6 +219,46 @@ versions:
                   maximum: 255
                   description: Blue value of the NeoPixel
 
+      SingleFade:
+        label: Fade single
+        method: POST
+        description: fade a single NeoPixel from color to black
+        uri: /{version}/single/fade
+        category: Single
+        request_parameters:
+          version:
+            type: Version
+            description: API version
+            generic: true
+        request_body:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: Position of the NeoPixel in the array
+            delay:
+              type: integer
+              description: Time to fade (in ms)
+            values:
+              type: object
+              description: Values to fade from
+              properties:
+                r:
+                  type: integer
+                  minimum: 0
+                  maximum: 255
+                  description: Red value
+                g:
+                  type: integer
+                  minimum: 0
+                  maximum: 255
+                  description: Green value
+                b:
+                  type: integer
+                  minimum: 0
+                  maximum: 255
+                  description: Blue value
+
     types:
       Version:
         description: A version of the API
